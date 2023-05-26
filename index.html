@@ -7,7 +7,14 @@
     <title>Vite App</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <button onclick="pay()">Pay</button>
+    </div>
     <script type="module" src="/src/index.ts"></script>
+    <script>
+      function pay() {
+        SpinStack.setup("key").initializePayment();
+      }
+    </script>
   </body>
 </html>

@@ -1,13 +1,13 @@
 {
-  "name": "vite-vanilla-ts-lib-starter",
+  "name": "spinstack",
   "private": true,
   "version": "0.0.2",
-  "main": "./dist/vite-ts-lib-starter.cjs",
-  "module": "./dist/vite-ts-lib-starter.mjs",
+  "main": "./dist/spinstack.cjs",
+  "module": "./dist/spinstack.mjs",
   "exports": {
     ".": {
-      "require": "./dist/vite-ts-lib-starter.cjs",
-      "import": "./dist/vite-ts-lib-starter.mjs"
+      "require": "./dist/spinstack.cjs",
+      "import": "./dist/spinstack.mjs"
     }
   },
   "scripts": {

@@ -1,3 +1,11 @@
-import "./style.css";
+export { SpinStack } from "./SpinStack";
 
-export { sum } from "./sum";
+import { SpinStack } from "./SpinStack";
+window.SpinStack = SpinStack;
+
+// add a global type for window
+declare global {
+  interface Window {
+    SpinStack: typeof SpinStack;
+  }
+}
