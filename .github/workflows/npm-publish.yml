@@ -33,6 +33,6 @@ jobs:
       - run: touch .env && echo "VITE_BASE_URL=https://spinstack-backend.herokuapp.com" >> .env
       - run: yarn install --frozen-lockfile
       - run: yarn build
-      - run: npm publish
+      - run: npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
