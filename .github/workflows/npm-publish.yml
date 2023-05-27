@@ -30,8 +30,8 @@ jobs:
           registry-url: https://registry.npmjs.org/
           # create a .env file in base directory with NODE_AUTH_TOKEN=<your npm token>
       - run: touch .env && echo "VITE_BASE_URL=https://spinstack-backend.herokuapp.com" >> .env
-      - run: npm ci
-      - run: npm run build
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
