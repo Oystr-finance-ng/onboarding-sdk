@@ -1,15 +1,15 @@
-/// <reference types="vitest" />
-import path from "path";
 import { defineConfig } from "vite";
 import packageJson from "./package.json";
+/// <reference types="vitest" />
+import path from "path";
 
 const getPackageName = () => {
-  return packageJson.name;
+  return packageJson.name.split("/").pop();
 };
 
 const getPackageNameCamelCase = () => {
   try {
-    return getPackageName().replace(/-./g, (char) => char[1].toUpperCase());
+    return (getPackageName() as string).replace(/-./g, (char) => char[1].toUpperCase());
   } catch (err) {
     throw new Error("Name property in package.json is missing.");
   }
