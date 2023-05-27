@@ -1,4 +1,5 @@
 import { OrderPayload } from "./OrderPayload";
+import { localUrl } from "./urls";
 
 export class SpinStack {
   public api_key: string;
@@ -13,7 +14,7 @@ export class SpinStack {
     this.displayLoading();
     let response;
     try {
-      response = await fetch("https://eo1onhxcc6n1esc.m.pipedream.net", {
+      response = await fetch(localUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -21,6 +22,10 @@ export class SpinStack {
         },
         body: JSON.stringify(data),
       });
+
+      const resp = await response.json();
+
+      window.open(resp.url, "_blank");
       this.removeLoading();
       return response.json();
     } catch (error) {
