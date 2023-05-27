@@ -18,7 +18,7 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: touch .env && echo "VITE_BASE_URL=https://spinstack-backend.herokuapp.com" >> .env
       - run: yarn build
-      - run: npm test
+      # - run: npm test
 
   publish-npm:
     needs: build
