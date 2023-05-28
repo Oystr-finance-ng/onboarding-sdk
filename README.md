@@ -6,8 +6,8 @@ The SpinStack SDK provides a convenient way to integrate the SpinStack Payment S
 
 To use the SpinStack SDK, you need to include the SDK script in your HTML file. You can either host the script locally or use a CDN. Here's an example of including the SDK using a CDN:
 
-```html
-<script src="https://cdn.spinstack.com/sdk/spinstack-sdk.min.js"></script>
+```
+npm install @myestery/spinstack
 ```
 
 ### Initialization and Payment Creation
