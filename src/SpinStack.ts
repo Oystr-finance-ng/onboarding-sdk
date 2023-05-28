@@ -25,9 +25,8 @@ export class SpinStack {
 
       const resp = await response.json();
 
-      window.open(resp.url, "_blank");
       this.removeLoading();
-      return response.json();
+      return resp.url;
     } catch (error) {
       console.log(error);
       this.removeLoading();

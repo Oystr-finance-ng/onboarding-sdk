@@ -2,7 +2,7 @@
   "name": "@myestery/spinstack",
   "private": false,
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "main": "./dist/spinstack.cjs",
   "module": "./dist/spinstack.mjs",
   "exports": {
@@ -24,6 +24,11 @@
     "prepare": "husky install && husky set .husky/pre-commit 'npx lint-staged' && git add .husky/pre-commit",
     "uninstall-husky": "npm uninstall husky --no-save && git config --unset core.hooksPath && npx rimraf .husky"
   },
+  "files": [
+    "dist",
+    "LICENSE.md",
+    "README.md"
+  ],
   "devDependencies": {
     "@types/jsdom": "^20.0.1",
     "@types/node": "^18.11.18",
