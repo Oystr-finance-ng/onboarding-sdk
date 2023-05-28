@@ -3,6 +3,10 @@
   "private": false,
   "license": "MIT",
   "version": "0.0.4",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:GHDECRYPTORS/spinstack_sdk.git"
+  },
   "main": "./dist/spinstack.cjs",
   "module": "./dist/spinstack.mjs",
   "exports": {
