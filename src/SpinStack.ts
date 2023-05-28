@@ -14,7 +14,7 @@ export class SpinStack {
     this.displayLoading();
     let response;
     try {
-      response = await fetch(localUrl, {
+      response = await fetch((localUrl as string) + "/api/v1/sdk/order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -25,9 +25,8 @@ export class SpinStack {
 
       const resp = await response.json();
 
-      window.open(resp.url, "_blank");
       this.removeLoading();
-      return response.json();
+      return resp.url;
     } catch (error) {
       console.log(error);
       this.removeLoading();

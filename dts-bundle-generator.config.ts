@@ -2,7 +2,8 @@
 const packageJson = require("./package.json");
 
 const getPackageName = () => {
-  return packageJson.name;
+  // get the last value after the last /
+  return packageJson.name.split("/").pop();
 };
 
 const config = {

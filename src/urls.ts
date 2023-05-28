@@ -1,1 +1,1 @@
-export const localUrl = "http://localhost:4000/api/v1/sdk/order";
+export const localUrl = import.meta.env.VITE_BASE_URL;
