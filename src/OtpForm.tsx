@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { BASE_URL, API_KEY } from "./constants";
 
 interface OtpFormProps {
   setStep: (step: number) => void;
@@ -7,6 +9,7 @@ interface OtpFormProps {
 
 const OtpForm: React.FC<OtpFormProps> = ({ setStep, submitStepTwo }) => {
   const [otp, setOtp] = useState("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOtp(e.target.value);
@@ -16,9 +19,38 @@ const OtpForm: React.FC<OtpFormProps> = ({ setStep, submitStepTwo }) => {
     e.preventDefault();
     // You can do something with the OTP value here, like sending it to an API for verification
     console.log("Entered OTP:", otp);
-    await submitStepTwo(otp);
+    setLoading(true);
+    //await submitStepTwo(otp);
+    try {
+      const res = await axios.post(
+        BASE_URL + "/api/guarantors/validate/otp",
+        {
+          otp: otp,
+          guarantor_id:
+            typeof window !== "undefined"
+              ? localStorage.getItem("guarantor_id")
+              : "1235678",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${API_KEY}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        setStep(2);
+      } else {
+        alert("An error occurred");
+        return;
+      }
+      setLoading(false);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+    }
     // Set the step to proceed to the next section
-    setStep(2);
+    //setStep(2);
   };
 
   const handleCancel = () => {
@@ -66,7 +98,7 @@ const OtpForm: React.FC<OtpFormProps> = ({ setStep, submitStepTwo }) => {
               type="submit"
               className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 sm:ml-3 sm:w-auto"
             >
-              Next
+              {loading ? "Loading..." : "Next"}
             </button>
             <button
               type="button"
