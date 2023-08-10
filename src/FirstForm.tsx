@@ -32,9 +32,11 @@ const FirstForm: React.FC<FirstFormProps> = ({ setStep, submitStepOne }) => {
     setLoading(true);
     try {
       const res = await axios.post(
-        BASE_URL + "/api/guarantors",
+        BASE_URL + "/api/guarantor",
         {
           ...formData,
+          user_id: "1235678",
+          name: formData.fullname,
         },
         {
           headers: {
@@ -44,6 +46,10 @@ const FirstForm: React.FC<FirstFormProps> = ({ setStep, submitStepOne }) => {
       );
       if (res.status === 200) {
         setStep(1);
+        localStorage.setItem(
+          "guarantor_id",
+          res?.data?.data?.guarantor?.user_id
+        );
       } else {
         alert("An error occurred");
         return;

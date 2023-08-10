@@ -29,7 +29,7 @@ const OtpForm: React.FC<OtpFormProps> = ({ setStep, submitStepTwo }) => {
           guarantor_id:
             typeof window !== "undefined"
               ? localStorage.getItem("guarantor_id")
-              : "1235678",
+              : "",
         },
         {
           headers: {
