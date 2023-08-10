@@ -23,7 +23,7 @@ const OtpForm: React.FC<OtpFormProps> = ({ setStep, submitStepTwo }) => {
     //await submitStepTwo(otp);
     try {
       const res = await axios.post(
-        BASE_URL + "/api/guarantors/validate/otp",
+        BASE_URL + "/api/guarantor/validate/otp",
         {
           otp: otp,
           guarantor_id:
