@@ -1,11 +1,11 @@
-export { SpinStack } from "./SpinStack";
+export { Onboarding } from "./Onboarding";
 
-import { SpinStack } from "./SpinStack";
-window.SpinStack = SpinStack;
+import { Onboarding } from "./Onboarding";
+window.Onboarding = Onboarding;
 
 // add a global type for window
 declare global {
   interface Window {
-    SpinStack: typeof SpinStack;
+    Onboarding: typeof Onboarding;
   }
 }
