@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { BASE_URL, API_KEY } from "./constants";
 
 interface FirstFormProps {
   setStep: (step: number) => void;
@@ -13,6 +15,7 @@ const FirstForm: React.FC<FirstFormProps> = ({ setStep, submitStepOne }) => {
     bvn: "",
     phone: "",
   });
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -25,9 +28,38 @@ const FirstForm: React.FC<FirstFormProps> = ({ setStep, submitStepOne }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // You can do something with the formData here, like sending it to an API or storing it in state
-    await submitStepOne(formData);
+    //await submitStepOne(formData);
+    setLoading(true);
+    try {
+      const res = await axios.post(
+        BASE_URL + "/api/guarantor",
+        {
+          ...formData,
+          user_id: "1235678",
+          name: formData.fullname,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${API_KEY}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        setStep(1);
+        localStorage.setItem(
+          "guarantor_id",
+          res?.data?.data?.guarantor?.user_id
+        );
+      } else {
+        alert("An error occurred");
+        return;
+      }
+      setLoading(false);
+    } catch (err: string | any) {
+      alert(err.response.data.message);
+    }
     // Set the step to proceed to the next section
-    setStep(1);
+    // setStep(1);
   };
 
   return (
@@ -171,7 +203,7 @@ const FirstForm: React.FC<FirstFormProps> = ({ setStep, submitStepOne }) => {
               type="submit"
               className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
             >
-              Next
+              {loading ? "Please wait..." : "Next"}
             </button>
             <button
               type="button"
