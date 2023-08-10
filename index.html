@@ -8,22 +8,18 @@
   </head>
   <body>
     <div id="app">
-      <button onclick="pay()">Pay</button>
+      <button onclick="pay()">Start Onboarding</button>
     </div>
     <script type="module" src="/src/index.ts"></script>
+    <!-- <script type="module" src="/dist/oystr-onboarding.cjs"></script> -->
     <script>
       function pay() {
-        SpinStack.setup(
-          "pub-41c31d69-1dcc-4b2c-89b9-2c7e335df4bc"
-        ).initializePayment({
-          tx_ref: "33222",
-          amount_in_wei: "400000000000000",
-          currency: "ETH",
-          customer_email: "yungdynamic53@gmail.com",
-          customer_name: "David",
-          title: "Payment for gas",
-          description: "description",
-        });
+        Onboarding.setup("pub-41c31d69-1dcc-4b2c-89b9-2c7e335df4bc").initialize(
+          {
+            user_id: "1235678",
+            reference: "1235678",
+          }
+        );
       }
     </script>
   </body>
