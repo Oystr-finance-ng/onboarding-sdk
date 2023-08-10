@@ -55,9 +55,8 @@ const FirstForm: React.FC<FirstFormProps> = ({ setStep, submitStepOne }) => {
         return;
       }
       setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
+    } catch (err: string | any) {
+      alert(err.response.data.message);
     }
     // Set the step to proceed to the next section
     // setStep(1);

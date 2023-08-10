@@ -45,8 +45,9 @@ const OtpForm: React.FC<OtpFormProps> = ({ setStep, submitStepTwo }) => {
       }
       setLoading(false);
       console.log(res);
-    } catch (err) {
-      console.log(err);
+    } catch (err: string | any) {
+      alert(err.response.data.message);
+
       setLoading(false);
     }
     // Set the step to proceed to the next section
