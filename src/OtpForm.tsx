@@ -97,7 +97,7 @@ const OtpForm: React.FC<OtpFormProps> = ({ setStep }) => {
                   onChange={onChange}
                   numInputs={6}
                   renderSeparator={<span></span>}
-                  renderInput={(props:any) => <input {...props} />}
+                  renderInput={(props: any) => <input {...props} />}
                   containerStyle="otp-input-container"
                 />
                 {counter === 0 ? (
