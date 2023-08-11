@@ -64,150 +64,118 @@ const FirstForm: React.FC<FirstFormProps> = ({ setStep, submitStepOne }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="space-y-12 mx-4 my-2">
-        <div className="border-b border-gray-900/10 pb-2">
+      <div className="space-y-12 form-container">
+        <div className="py-2">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
-            Basic Details for Guarantor
+            Guarantor Onboarding
           </h2>
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            {/* Full Name */}
-            <div className="sm:col-span-4">
-              <label
-                htmlFor="fullname"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Full Name
-              </label>
-              <div className="mt-2">
-                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                  <input
-                    type="text"
-                    name="fullname"
-                    id="fullname"
-                    required
-                    autoComplete="fullname"
-                    value={formData.fullname}
-                    onChange={handleInputChange}
-                    className="block flex-1 border-0 bg-transparent py-1.5  text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 px-4"
-                    placeholder="john doe"
-                  />
+          <p>Please provide the guarantor information below</p>
+          <div className="form-items mt-[24px]">
+            <div className="form-layout">
+              <h2>Personal Details</h2>
+              <div className="sm:col-span-4">
+                <div className="mt-2">
+                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
+                    <input
+                      type="text"
+                      name="fullname"
+                      id="fullname"
+                      required
+                      autoComplete="fullname"
+                      value={formData.fullname}
+                      onChange={handleInputChange}
+                      className="form-input"
+                      placeholder="Full Name"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="sm:col-span-4">
+                <div className="mt-2">
+                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
+                    <input
+                      required
+                      type="email"
+                      name="email"
+                      id="email"
+                      autoComplete="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="form-input"
+                      placeholder="Email Address"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="sm:col-span-4">
+                <div className="mt-2">
+                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
+                    <input
+                      required
+                      type="text"
+                      name="address"
+                      id="address"
+                      autoComplete="address"
+                      value={formData.address}
+                      onChange={handleInputChange}
+                      className="form-input"
+                      placeholder="Address (1234 Main St)"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Email */}
-            <div className="sm:col-span-4">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Email Address
-              </label>
-              <div className="mt-2">
-                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                  <input
-                    required
-                    type="email"
-                    name="email"
-                    id="email"
-                    autoComplete="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="block flex-1 border-0 bg-transparent py-1.5  text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 px-4"
-                    placeholder="mail@mail.com"
-                  />
+            <div className="form-layout mt-[30px]">
+              <h2>BVN Verification</h2>
+              <div className="sm:col-span-4">
+                <div className="mt-2">
+                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
+                    <input
+                      required
+                      type="text"
+                      name="bvn"
+                      id="bvn"
+                      autoComplete="bvn"
+                      value={formData.bvn}
+                      maxLength={11}
+                      minLength={11}
+                      onChange={handleInputChange}
+                      className="form-input"
+                      placeholder="BVN (12345678901)"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Address */}
-            <div className="sm:col-span-4">
-              <label
-                htmlFor="address"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Address
-              </label>
-              <div className="mt-2">
-                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                  <input
-                    required
-                    type="text"
-                    name="address"
-                    id="address"
-                    autoComplete="address"
-                    value={formData.address}
-                    onChange={handleInputChange}
-                    className="block flex-1 border-0 bg-transparent py-1.5  text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 px-4"
-                    placeholder="1234 Main St"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* BVN */}
-            <div className="sm:col-span-4">
-              <label
-                htmlFor="bvn"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                BVN
-              </label>
-              <div className="mt-2">
-                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                  <input
-                    required
-                    type="text"
-                    name="bvn"
-                    id="bvn"
-                    autoComplete="bvn"
-                    value={formData.bvn}
-                    maxLength={11}
-                    minLength={11}
-                    onChange={handleInputChange}
-                    className="block flex-1 border-0 bg-transparent py-1.5  text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 px-4"
-                    placeholder="12345678901"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Phone Number */}
-            <div className="sm:col-span-4">
-              <label
-                htmlFor="phone"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Phone Number
-              </label>
-              <div className="mt-2">
-                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                  <input
-                    required
-                    type="tel"
-                    name="phone"
-                    id="phone"
-                    autoComplete="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="block flex-1 border-0 bg-transparent py-1.5  text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 px-4"
-                    placeholder="12345678901"
-                  />
+              {/* Phone Number */}
+              <div className="sm:col-span-4">
+                <div className="mt-2">
+                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
+                    <input
+                      required
+                      type="tel"
+                      name="phone"
+                      id="phone"
+                      autoComplete="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="form-input"
+                      placeholder="Phone Number (08012345678)"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className=" px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-            <button
-              type="submit"
-              className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-            >
+          <div className="form-btn-layout">
+            <button type="submit" className="form-btn-next">
               {loading ? "Please wait..." : "Next"}
             </button>
             <button
               type="button"
-              className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+              className="form-btn-cancel"
               //   onClick={() => setOpen(false)}
             >
               Cancel
