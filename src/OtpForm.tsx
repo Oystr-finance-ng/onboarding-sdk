@@ -1,22 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BASE_URL, API_KEY } from "./constants";
+import OtpInput from "react-otp-input";
 
 interface OtpFormProps {
   setStep: (step: number) => void;
   submitStepTwo: (data: any) => void;
 }
 
+interface OTPInputProps {
+  value: string;
+  onChange: (value: string) => void;
+  numInputs?: number;
+  renderSeparator?: JSX.Element;
+  renderInput?: (props: any) => JSX.Element;
+}
+
 const OtpForm: React.FC<OtpFormProps> = ({ setStep, submitStepTwo }) => {
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [counter, setCounter] = useState<number>(60);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setOtp(e.target.value);
-  };
+  const onChange = (value: string) => setOtp(value);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     // You can do something with the OTP value here, like sending it to an API for verification
     console.log("Entered OTP:", otp);
     setLoading(true);
@@ -59,59 +66,69 @@ const OtpForm: React.FC<OtpFormProps> = ({ setStep, submitStepTwo }) => {
     // For example: setOpen(false);
   };
 
+  useEffect(() => {
+    let count = 60;
+    const timer = setInterval(() => {
+      count--;
+      setCounter(count);
+      if (count === 0) {
+        clearInterval(timer);
+      }
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="space-y-12 mx-4 my-2">
-        <div className="border-b border-gray-900/10 pb-2">
-          <h2 className="text-base font-semibold leading-7 text-gray-900">
-            An OTP has been sent to the email address of the guarantor
-          </h2>
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            {/* OTP */}
-            <div className="sm:col-span-4">
-              <label
-                htmlFor="otp"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                OTP
-              </label>
-              <div className="mt-2">
-                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                  <input
-                    type="text"
-                    name="otp"
-                    id="otp"
-                    autoComplete="otp"
-                    value={otp}
-                    maxLength={6}
-                    required
-                    onChange={handleInputChange}
-                    className="block flex-1 border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 px-4"
-                    placeholder="123456"
-                  />
-                </div>
+    <div className="space-y-12 mx-4 my-4">
+      <div className="py-2 otpform">
+        <h2>Enter Guarantor OTP PIN</h2>
+        <p className="pt-3">
+          Enter the 6-digit otp sent to your Guarantor Email address
+        </p>
+        <div className="">
+          {/* OTP */}
+
+          <div className="sm:col-span-4">
+            <div className="mt-6">
+              <div className="form-input-groups">
+                <OtpInput
+                  value={otp}
+                  onChange={onChange}
+                  numInputs={6}
+                  renderSeparator={<span></span>}
+                  renderInput={props => <input {...props} />}
+                  containerStyle="otp-input-container"
+                />
+                {counter === 0 ? (
+                  <p className="pt-3">
+                    Didn’t get the code?
+                    <span style={{ color: "#2BA84A" }}> Resend Code</span>
+                  </p>
+                ) : (
+                  <p className="pt-3">
+                    Didn’t get the code? Resend in{" "}
+                    <span style={{ color: "#2BA84A" }}>{counter} secs</span>
+                  </p>
+                )}
               </div>
             </div>
           </div>
-
-          <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-            <button
-              type="submit"
-              className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 sm:ml-3 sm:w-auto"
-            >
-              {loading ? "Loading..." : "Next"}
-            </button>
-            <button
-              type="button"
-              className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-              onClick={handleCancel}
-            >
-              Cancel
-            </button>
-          </div>
         </div>
       </div>
-    </form>
+
+      <div className="form-btn-layout no-spacing">
+        <button onClick={handleSubmit} className="form-btn-next">
+          {loading ? "Loading..." : "Next"}
+        </button>
+        <button
+          type="button"
+          className="form-btn-cancel"
+          onClick={handleCancel}
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
   );
 };
 
