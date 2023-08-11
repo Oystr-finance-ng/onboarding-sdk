@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { BASE_URL, API_KEY } from "./constants";
+import { API_KEY, BASE_URL } from "./constants";
+import React, { useEffect, useState } from "react";
+
 import OtpInput from "react-otp-input";
+import axios from "axios";
 
 interface OtpFormProps {
   setStep: (step: number) => void;
   submitStepTwo: (data: any) => void;
 }
 
-interface OTPInputProps {
-  value: string;
-  onChange: (value: string) => void;
-  numInputs?: number;
-  renderSeparator?: JSX.Element;
-  renderInput?: (props: any) => JSX.Element;
-}
+// interface OTPInputProps {
+//   value: string;
+//   onChange: (value: string) => void;
+//   numInputs?: number;
+//   renderSeparator?: JSX.Element;
+//   renderInput?: (props: any) => JSX.Element;
+// }
 
-const OtpForm: React.FC<OtpFormProps> = ({ setStep, submitStepTwo }) => {
+const OtpForm: React.FC<OtpFormProps> = ({ setStep }) => {
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
   const [counter, setCounter] = useState<number>(60);
@@ -96,7 +97,7 @@ const OtpForm: React.FC<OtpFormProps> = ({ setStep, submitStepTwo }) => {
                   onChange={onChange}
                   numInputs={6}
                   renderSeparator={<span></span>}
-                  renderInput={props => <input {...props} />}
+                  renderInput={(props:any) => <input {...props} />}
                   containerStyle="otp-input-container"
                 />
                 {counter === 0 ? (

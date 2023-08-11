@@ -7,7 +7,7 @@ interface FirstFormProps {
   submitStepOne: (data: any) => void;
 }
 
-const FirstForm: React.FC<FirstFormProps> = ({ setStep, submitStepOne }) => {
+const FirstForm: React.FC<FirstFormProps> = ({ setStep }) => {
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
