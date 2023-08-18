@@ -67,10 +67,6 @@
   font-family: Inter !important;
 }
 
-.form-input:focus {
-  outline: 2px solid #2ba84a;
-}
-
 .form-input::placeholder {
   color: #667085;
   font-family: Inter;
@@ -132,9 +128,9 @@
   border: 1.485px solid rgba(0, 0, 0, 0.1);
 }
 
-.form-input-groups input:focus {
+/* .form-input-groups input:focus {
   outline: 2px solid #2ba84a;
-}
+} */
 
 .no-spacing {
   margin-top: 0.8rem !important;

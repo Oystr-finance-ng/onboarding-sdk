@@ -7,6 +7,7 @@ import axios from "axios";
 interface OtpFormProps {
   setStep: (step: number) => void;
   submitStepTwo: (data: any) => void;
+  color?: string;
 }
 
 // interface OTPInputProps {
@@ -17,7 +18,7 @@ interface OtpFormProps {
 //   renderInput?: (props: any) => JSX.Element;
 // }
 
-const OtpForm: React.FC<OtpFormProps> = ({ setStep }) => {
+const OtpForm: React.FC<OtpFormProps> = ({ setStep, color }) => {
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
   const [counter, setCounter] = useState<number>(60);
@@ -82,7 +83,13 @@ const OtpForm: React.FC<OtpFormProps> = ({ setStep }) => {
   return (
     <div className="space-y-12 mx-4 my-4">
       <div className="py-2 otpform">
-        <h2>Enter Guarantor OTP PIN</h2>
+        <h2
+          style={{
+            color: color,
+          }}
+        >
+          Enter Guarantor OTP PIN
+        </h2>
         <p className="pt-3">
           Enter the 6-digit otp sent to your Guarantor Email address
         </p>
@@ -103,12 +110,12 @@ const OtpForm: React.FC<OtpFormProps> = ({ setStep }) => {
                 {counter === 0 ? (
                   <p className="pt-3">
                     Didn’t get the code?
-                    <span style={{ color: "#2BA84A" }}> Resend Code</span>
+                    <span style={{ color: color }}> Resend Code</span>
                   </p>
                 ) : (
                   <p className="pt-3">
                     Didn’t get the code? Resend in{" "}
-                    <span style={{ color: "#2BA84A" }}>{counter} secs</span>
+                    <span style={{ color: color }}>{counter} secs</span>
                   </p>
                 )}
               </div>

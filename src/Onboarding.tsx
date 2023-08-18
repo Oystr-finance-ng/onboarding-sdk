@@ -2,6 +2,7 @@
 
 import OnboardingPage from "./OnboardingPage"; // Import your OnboardingPage component
 import { createRoot } from "react-dom/client";
+import GeneralState from "./context/general-context/GeneralState";
 
 export class Onboarding {
   public api_key: string;
@@ -30,7 +31,11 @@ export class Onboarding {
       containerDiv.id = "oystr-onboarding-container";
       iframeDocument.body.appendChild(containerDiv);
       const root = createRoot(containerDiv!);
-      root.render(<OnboardingPage api_key={this.api_key} data={data} />);
+      root.render(
+        <GeneralState>
+          <OnboardingPage api_key={this.api_key} data={data} />
+        </GeneralState>
+      );
     } else {
       console.error("Failed to access iframe document.");
     }

@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { BASE_URL, API_KEY } from "./constants";
+import Loading from "./loading/Loading";
 
 interface FirstFormProps {
   setStep: (step: number) => void;
   submitStepOne: (data: any) => void;
+  color?: string;
 }
 
-const FirstForm: React.FC<FirstFormProps> = ({ setStep }) => {
+const FirstForm: React.FC<FirstFormProps> = ({ setStep, color }) => {
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
@@ -16,6 +18,7 @@ const FirstForm: React.FC<FirstFormProps> = ({ setStep }) => {
     phone: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -62,17 +65,30 @@ const FirstForm: React.FC<FirstFormProps> = ({ setStep }) => {
     // setStep(1);
   };
 
+  console.log(color);
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="space-y-12 form-container">
         <div className="py-2">
-          <h2 className="text-base font-semibold leading-7 text-gray-900">
+          <h2
+            className="text-base font-semibold leading-7 text-gray-900"
+            style={{
+              color: color,
+            }}
+          >
             Guarantor Onboarding
           </h2>
           <p>Please provide the guarantor information below</p>
           <div className="form-items mt-[24px]">
             <div className="form-layout">
-              <h2>Personal Details</h2>
+              <h2
+                style={{
+                  color: color,
+                }}
+              >
+                Personal Details
+              </h2>
               <div className="sm:col-span-4">
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
@@ -127,7 +143,13 @@ const FirstForm: React.FC<FirstFormProps> = ({ setStep }) => {
             </div>
 
             <div className="form-layout mt-[30px]">
-              <h2>BVN Verification</h2>
+              <h2
+                style={{
+                  color: color,
+                }}
+              >
+                BVN Verification
+              </h2>
               <div className="sm:col-span-4">
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
@@ -170,7 +192,14 @@ const FirstForm: React.FC<FirstFormProps> = ({ setStep }) => {
           </div>
 
           <div className="form-btn-layout">
-            <button type="submit" className="form-btn-next">
+            <button
+              type="submit"
+              className="form-btn-next"
+              style={{
+                background: color,
+                border: `1px solid ${color}`,
+              }}
+            >
               {loading ? "Please wait..." : "Next"}
             </button>
             <button
