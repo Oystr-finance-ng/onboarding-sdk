@@ -10,7 +10,7 @@ const GeneralState = ({ children }: { children: React.ReactNode }) => {
 
   const [state, dispatch] = useReducer(GeneralReducer, initialState);
 
-  const getBusiness = (business: any) => {
+  const getBusiness = (business: unknown): void => {
     dispatch({
       type: GET_BUSINESS,
       payload: business,
