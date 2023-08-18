@@ -125,7 +125,11 @@ const OtpForm: React.FC<OtpFormProps> = ({ setStep, color }) => {
       </div>
 
       <div className="form-btn-layout no-spacing">
-        <button onClick={handleSubmit} className="form-btn-next">
+        <button
+          onClick={handleSubmit}
+          className="form-btn-next"
+          style={{ background: color, border: `1px solid ${color}` }}
+        >
           {loading ? "Loading..." : "Next"}
         </button>
         <button
