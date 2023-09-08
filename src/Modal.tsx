@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 
 // import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
@@ -11,7 +11,12 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ children }) => {
   const [open, setOpen] = useState(true);
 
-  //   const cancelButtonRef = useRef(null);
+  useEffect(() => {
+    const listener = () => setOpen(false);
+
+    window.addEventListener('close-modal', listener);
+    return () => window.removeEventListener('close-modal', listener);
+  }, [])
 
   return (
     <Transition.Root show={open} as={Fragment}>
